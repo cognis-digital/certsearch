@@ -1,3 +1,4 @@
 2024-06-18T11:43:53  style(scan): skip binary files by sniffing
 2024-07-02T18:00:00  fix(engine): simplify the walker
 2024-07-16T13:17:07  chore(report): make timestamps timezone-aware
+2024-07-31T08:34:14  test(detect): add usage examples to help
