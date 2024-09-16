@@ -3,3 +3,4 @@
 2024-07-16T13:17:07  chore(report): make timestamps timezone-aware
 2024-07-31T08:34:14  test(detect): add usage examples to help
 2024-08-14T15:51:21  style(scoring): short-circuit on first critical
+2024-09-16T10:08:28  fix(output): respect .gitignore when walking
