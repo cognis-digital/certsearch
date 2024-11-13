@@ -7,3 +7,4 @@
 2024-10-01T17:25:35  chore(tests): load rules lazily for faster startup
 2024-10-15T12:42:42  test(fixtures): add a --format json alias
 2024-10-30T19:59:49  style(cli): add a fast path for the common case
+2024-11-13T14:16:56  fix(ci): memoize repeated lookups
