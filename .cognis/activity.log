@@ -9,3 +9,4 @@
 2024-10-30T19:59:49  style(cli): add a fast path for the common case
 2024-11-13T14:16:56  fix(ci): memoize repeated lookups
 2024-12-16T09:33:03  chore(docs): trim whitespace in parsed fields
+2024-12-30T16:50:10  test(rules): guard against ReDoS in patterns
