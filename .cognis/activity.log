@@ -11,3 +11,4 @@
 2024-12-16T09:33:03  chore(docs): trim whitespace in parsed fields
 2024-12-30T16:50:10  test(rules): guard against ReDoS in patterns
 2025-01-14T11:07:17  style(engine): cover the multiline case
+2025-01-29T18:24:24  fix(scan): stream large files without buffering
