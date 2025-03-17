@@ -13,3 +13,4 @@
 2025-01-14T11:07:17  style(engine): cover the multiline case
 2025-01-29T18:24:24  fix(scan): stream large files without buffering
 2025-03-02T13:41:31  chore(format): support stdin as a source
+2025-03-17T08:58:38  test(io): handle CRLF line endings
