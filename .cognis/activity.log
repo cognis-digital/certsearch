@@ -14,3 +14,4 @@
 2025-01-29T18:24:24  fix(scan): stream large files without buffering
 2025-03-02T13:41:31  chore(format): support stdin as a source
 2025-03-17T08:58:38  test(io): handle CRLF line endings
+2025-03-31T15:15:45  style(output): bump the dev toolchain
