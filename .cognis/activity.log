@@ -16,3 +16,4 @@
 2025-03-17T08:58:38  test(io): handle CRLF line endings
 2025-03-31T15:15:45  style(output): bump the dev toolchain
 2025-04-15T10:32:52  fix(scoring): add a regression fixture
+2025-04-30T17:49:59  chore(fixtures): clarify the README quickstart
