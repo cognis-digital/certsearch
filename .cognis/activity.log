@@ -18,3 +18,4 @@
 2025-04-15T10:32:52  fix(scoring): add a regression fixture
 2025-04-30T17:49:59  chore(fixtures): clarify the README quickstart
 2025-06-01T12:06:06  test(tests): improve error messages with context
+2025-06-16T19:23:13  style(deps): skip binary files by sniffing
