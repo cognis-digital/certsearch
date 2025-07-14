@@ -20,3 +20,4 @@
 2025-06-01T12:06:06  test(tests): improve error messages with context
 2025-06-16T19:23:13  style(deps): skip binary files by sniffing
 2025-06-30T14:40:20  fix(core): simplify the walker
+2025-07-14T09:57:27  chore(rules): make timestamps timezone-aware
