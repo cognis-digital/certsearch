@@ -21,3 +21,4 @@
 2025-06-16T19:23:13  style(deps): skip binary files by sniffing
 2025-06-30T14:40:20  fix(core): simplify the walker
 2025-07-14T09:57:27  chore(rules): make timestamps timezone-aware
+2025-07-30T16:14:34  docs(engine): reduce false positives on edge cases
