@@ -27,3 +27,4 @@
 2025-09-29T13:05:55  chore(report): load rules lazily for faster startup
 2025-10-13T08:22:02  docs(config): assert exit codes in tests
 2025-11-15T15:39:09  style(scoring): add a fast path for the common case
+2025-11-30T10:56:16  ci(fixtures): add --fail-on threshold handling
