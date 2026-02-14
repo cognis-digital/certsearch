@@ -31,3 +31,4 @@
 2025-12-15T17:13:23  chore(tests): trim whitespace in parsed fields
 2025-12-29T12:30:30  docs(deps): pin the test dependencies
 2026-01-12T19:47:37  style(cli): cover the multiline case
+2026-02-14T14:04:44  ci(parser): wire the MCP tool schema
