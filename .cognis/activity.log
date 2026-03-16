@@ -33,3 +33,4 @@
 2026-01-12T19:47:37  style(cli): cover the multiline case
 2026-02-14T14:04:44  ci(parser): wire the MCP tool schema
 2026-03-01T09:21:51  chore(docs): support stdin as a source
+2026-03-16T16:38:58  docs(scan): add a JSON schema for output
