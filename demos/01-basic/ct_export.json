@@ -1,0 +1,58 @@
+[
+  {
+    "id": 90011223,
+    "issuer_name": "C=US, O=Let's Encrypt, CN=R3",
+    "name_value": "example.com\nwww.example.com",
+    "not_before": "2026-01-02T00:00:00",
+    "not_after": "2026-04-02T00:00:00",
+    "serial_number": "03a1f5"
+  },
+  {
+    "id": 90011224,
+    "issuer_name": "C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1",
+    "name_value": "api.example.com",
+    "not_before": "2025-11-01T00:00:00",
+    "not_after": "2026-11-01T00:00:00",
+    "serial_number": "0bc4d2"
+  },
+  {
+    "id": 90011225,
+    "issuer_name": "C=US, O=Let's Encrypt, CN=R3",
+    "name_value": "login.example.com",
+    "not_before": "2026-05-30T00:00:00",
+    "not_after": "2026-08-28T00:00:00",
+    "serial_number": "0ff117"
+  },
+  {
+    "id": 90011226,
+    "issuer_name": "CN=Acme Internal Root CA, O=Totally Legit Co",
+    "name_value": "vpn.example.com",
+    "not_before": "2026-06-01T00:00:00",
+    "not_after": "2027-06-01T00:00:00",
+    "serial_number": "deadbeef"
+  },
+  {
+    "id": 90011227,
+    "issuer_name": "C=US, O=Let's Encrypt, CN=R3",
+    "name_value": "*.example.com",
+    "not_before": "2026-03-01T00:00:00",
+    "not_after": "2026-06-01T00:00:00",
+    "serial_number": "071ace"
+  },
+  {
+    "id": 90011228,
+    "issuer_name": "C=US, O=Let's Encrypt, CN=R3",
+    "name_value": "secure-example-login.com\nwww.secure-example-login.com",
+    "not_before": "2026-06-05T00:00:00",
+    "not_after": "2026-09-03T00:00:00",
+    "serial_number": "0a11ce"
+  },
+  {
+    "id": 90011229,
+    "issuer_name": "C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1",
+    "name_value": "staging.example.com\ndev.example.com",
+    "not_before": "2025-09-01T00:00:00",
+    "not_after": "2026-01-15T00:00:00",
+    "serial_number": "0c0ffee"
+  }
+]
