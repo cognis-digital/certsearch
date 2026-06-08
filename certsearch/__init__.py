@@ -1,28 +1,11 @@
-"""CERTSEARCH — Certificate-Transparency export analyzer.
-
-Analyze CT log exports (crt.sh-style JSON/CSV) for subdomain enumeration
-and rogue / suspicious certificate issuance against domains you own.
-Defensive/forensics only: operates on artifacts you already possess.
-"""
-from .core import (
-    Certificate,
-    Finding,
-    AnalysisResult,
-    parse_export,
-    analyze,
-    SEVERITY_ORDER,
-)
-
-TOOL_NAME = "certsearch"
-TOOL_VERSION = "1.0.0"
-
-__all__ = [
-    "Certificate",
-    "Finding",
-    "AnalysisResult",
-    "parse_export",
-    "analyze",
-    "SEVERITY_ORDER",
-    "TOOL_NAME",
-    "TOOL_VERSION",
-]
+"""certsearch — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from certsearch.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from certsearch.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "certsearch"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
