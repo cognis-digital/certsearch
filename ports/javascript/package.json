@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/certsearch",
+  "version": "0.2.0",
+  "description": "JavaScript port of certsearch (Cognis Neural Suite)",
+  "bin": {
+    "certsearch": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
