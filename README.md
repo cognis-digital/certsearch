@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-certsearch
+pip install "git+https://github.com/cognis-digital/certsearch.git"
 certsearch scan .            # → prioritized findings in seconds
 ```
 
@@ -47,7 +47,7 @@ Analyze Certificate-Transparency exports for subdomains & rogue issuance — wit
 ## Quick start
 
 ```bash
-pip install cognis-certsearch
+pip install "git+https://github.com/cognis-digital/certsearch.git"
 certsearch --version
 certsearch scan .                       # scan current project
 certsearch scan . --format json         # machine-readable
