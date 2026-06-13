@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/certsearch.git"
 certsearch scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+Certificate Transparency is a public record of every SSL/TLS certificate ever issued for a domain. certsearch reads those records for a domain you own and tells you what it finds: every subdomain that has had a certificate, any suspicious "lookalike" domains that try to impersonate your brand, certificates issued by unknown or untrusted authorities, and certificates that have already expired. It is a defensive security tool for website and domain owners who want to know if someone is issuing unauthorized certificates for their domains or setting up phishing sites that mimic them. You give it a CT export file and your domain name, and within seconds it produces a prioritized list of findings you can review or feed into your security workflow.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why certsearch?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -44,6 +50,42 @@ Analyze Certificate-Transparency exports for subdomains & rogue issuance — wit
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`certsearch` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/certsearch/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/certsearch/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/certsearch.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/certsearch.git"  # uv
+pip install "git+https://github.com/cognis-digital/certsearch.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/certsearch.git
+cd certsearch && pip install .
+```
+
+Then run:
+```sh
+certsearch --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
