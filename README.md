@@ -20,6 +20,31 @@ pip install cognis-certsearch
 certsearch scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+`certsearch` analyzes a Certificate-Transparency export to surface subdomains for one base domain.
+
+1. **Install**:
+   ```bash
+   pip install -e .
+   ```
+2. **Analyze a CT export** (JSON/JSONL/CSV) for a base domain:
+   ```bash
+   certsearch analyze ct-export.jsonl -d example.com
+   ```
+3. **Pipe the export via stdin**:
+   ```bash
+   cat ct-export.json | certsearch analyze - -d example.com
+   ```
+4. **Write a report** to a file as JSON or HTML:
+   ```bash
+   certsearch analyze ct-export.jsonl -d example.com --format html -o report.html
+   ```
+5. **Automate in CI/cron** — emit JSON for an attack-surface monitor:
+   ```bash
+   certsearch analyze ct-export.jsonl -d example.com --format json -o subdomains.json
+   ```
+
 ## Contents
 
 - [Why certsearch?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
