@@ -7,7 +7,7 @@ import sys
 from html import escape
 
 from . import TOOL_NAME, TOOL_VERSION
-from .core import AnalysisResult, analyze, parse_export
+from .core import AnalysisResult, CertsearchError, analyze, parse_export
 
 _SEV_COLOR = {
     "critical": "#b00020",
@@ -153,9 +153,15 @@ def _build_parser() -> argparse.ArgumentParser:
     sub = p.add_subparsers(dest="command", required=True)
 
     a = sub.add_parser("analyze", help="analyze a CT export for one base domain")
-    a.add_argument("export", help="path to CT export (JSON/JSONL/CSV), or '-' for stdin")
-    a.add_argument("-d", "--domain", required=True,
-                   help="base domain you own, e.g. example.com")
+    a.add_argument(
+        "export",
+        help="path to CT export (JSON/JSONL/CSV), or '-' for stdin",
+    )
+    a.add_argument(
+        "-d", "--domain",
+        required=True,
+        help="base domain you own, e.g. example.com",
+    )
     a.add_argument("--format", choices=("table", "json", "html"), default="table",
                    help="output format (html writes a self-contained report)")
     a.add_argument("-o", "--output", help="write report to this file instead of stdout")
@@ -167,13 +173,23 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "analyze":
+        if not args.domain or not args.domain.strip():
+            print("error: --domain must not be empty", file=sys.stderr)
+            return 2
         try:
             text = _read(args.export)
         except OSError as exc:
             print(f"error: cannot read export: {exc}", file=sys.stderr)
             return 2
-        certs = parse_export(text)
-        res = analyze(certs, args.domain)
+        try:
+            certs = parse_export(text)
+            res = analyze(certs, args.domain)
+        except CertsearchError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+        except Exception as exc:  # noqa: BLE001
+            print(f"error: unexpected failure during analysis: {exc}", file=sys.stderr)
+            return 2
 
         if args.format == "json":
             out = json.dumps(res.to_dict(), indent=2)

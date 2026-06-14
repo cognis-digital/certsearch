@@ -137,5 +137,98 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(rc, 2)
 
 
+class TestHardening(unittest.TestCase):
+    """Tests for hardened error paths and edge cases."""
+
+    # --- core.analyze() domain validation ---
+
+    def test_analyze_empty_domain_raises(self):
+        from certsearch.core import CertsearchError
+        with self.assertRaises(CertsearchError):
+            analyze([], "")
+
+    def test_analyze_whitespace_domain_raises(self):
+        from certsearch.core import CertsearchError
+        with self.assertRaises(CertsearchError):
+            analyze([], "   ")
+
+    def test_analyze_no_dot_domain_raises(self):
+        from certsearch.core import CertsearchError
+        with self.assertRaises(CertsearchError):
+            analyze([], "localhost")
+
+    def test_analyze_empty_cert_list(self):
+        """analyze() with zero certificates must return a valid empty result."""
+        res = analyze([], "example.com")
+        self.assertEqual(res.total_certs, 0)
+        self.assertEqual(res.subdomains, [])
+        self.assertEqual(res.findings, [])
+        self.assertEqual(res.max_severity, "info")
+
+    # --- parse_export edge cases ---
+
+    def test_parse_export_whitespace_only(self):
+        self.assertEqual(parse_export("   \n\t  "), [])
+
+    def test_parse_export_json_non_dict_items_ignored(self):
+        """JSON arrays containing non-dict items must not raise."""
+        result = parse_export('[null, "string", 42, {"name_value": "ok.example.com"}]')
+        # The non-dict items are skipped; the valid dict becomes a cert
+        self.assertEqual(len(result), 1)
+
+    def test_parse_export_malformed_json_falls_through_to_csv(self):
+        """Malformed JSON that can't be parsed should fall through to CSV."""
+        # This is valid CSV with a common_name header
+        csv_data = "common_name,not_after\nblog.example.com,2030-01-01"
+        result = parse_export(csv_data)
+        self.assertEqual(len(result), 1)
+        self.assertIn("blog.example.com", result[0].names)
+
+    def test_parse_export_empty_json_array(self):
+        self.assertEqual(parse_export("[]"), [])
+
+    def test_parse_export_single_json_object(self):
+        """A bare JSON object (not wrapped in array) should produce one cert."""
+        result = parse_export('{"name_value": "api.example.com"}')
+        self.assertEqual(len(result), 1)
+        self.assertIn("api.example.com", result[0].names)
+
+    # --- CLI domain validation ---
+
+    def test_cli_empty_domain_returns_2(self):
+        import tempfile
+        data = '[{"name_value": "x.example.com"}]'
+        with tempfile.NamedTemporaryFile(
+                "w", suffix=".json", delete=False, encoding="utf-8") as tf:
+            tf.write(data)
+            path = tf.name
+        try:
+            rc = main(["analyze", path, "-d", "  "])
+            self.assertEqual(rc, 2)
+        finally:
+            os.unlink(path)
+
+    def test_cli_invalid_domain_returns_2(self):
+        import tempfile
+        data = '[{"name_value": "x.example.com"}]'
+        with tempfile.NamedTemporaryFile(
+                "w", suffix=".json", delete=False, encoding="utf-8") as tf:
+            tf.write(data)
+            path = tf.name
+        try:
+            rc = main(["analyze", path, "-d", "notadomain"])
+            self.assertEqual(rc, 2)
+        finally:
+            os.unlink(path)
+
+    # --- mcp_server import sanity ---
+
+    def test_mcp_server_imports_cleanly(self):
+        """mcp_server must be importable without raising (no broken imports)."""
+        import certsearch.mcp_server  # noqa: F401
+        # Just importing is sufficient; serve() requires the optional mcp dep
+        self.assertTrue(callable(certsearch.mcp_server.serve))
+
+
 if __name__ == "__main__":
     unittest.main()

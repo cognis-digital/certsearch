@@ -16,6 +16,10 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Iterable
 
+
+class CertsearchError(ValueError):
+    """Raised for invalid input that prevents analysis."""
+
 SEVERITY_ORDER = {"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4}
 
 # Issuers commonly trusted by orgs. A cert for your domain from anything
@@ -153,11 +157,13 @@ def _split_names(*fields: str) -> list[str]:
 
 
 def _cert_from_obj(obj: dict) -> Certificate:
+    if not isinstance(obj, dict):
+        return Certificate(names=[])
     names = _split_names(
-        obj.get("name_value", ""),
-        obj.get("common_name", ""),
-        obj.get("dns_names", ""),
-        obj.get("subject", ""),
+        obj.get("name_value", "") or "",
+        obj.get("common_name", "") or "",
+        obj.get("dns_names", "") or "",
+        obj.get("subject", "") or "",
     )
     if isinstance(obj.get("dns_names"), list):
         names = _split_names("\n".join(obj["dns_names"]), *names)
@@ -166,6 +172,7 @@ def _cert_from_obj(obj: dict) -> Certificate:
         or obj.get("issuer_ca_id")
         and obj.get("issuer", "")
         or obj.get("issuer", "")
+        or ""
     ).strip()
     return Certificate(
         names=names,
@@ -243,7 +250,14 @@ def _looks_like_phish(name: str, base: str) -> str | None:
 
 
 def analyze(certs: Iterable[Certificate], base_domain: str) -> AnalysisResult:
+    if not base_domain or not base_domain.strip():
+        raise CertsearchError("base_domain must not be empty")
     base = base_domain.strip().lower().lstrip("*.").rstrip(".")
+    if not base or "." not in base:
+        raise CertsearchError(
+            f"base_domain must be a valid domain like 'example.com', got: "
+            f"{base_domain!r}"
+        )
     res = AnalysisResult(base_domain=base)
     certs = list(certs)
     res.total_certs = len(certs)
