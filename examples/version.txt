@@ -1,0 +1,3 @@
+$ certsearch-emit --version
+
+certsearch 0.1.0

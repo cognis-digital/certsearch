@@ -1,0 +1,14 @@
+$ certsearch-emit --help
+
+usage: certsearch [-h] [--version] {analyze} ...
+
+Analyze Certificate-Transparency exports for subdomains and rogue issuance
+(defensive recon on domains you own).
+
+positional arguments:
+  {analyze}
+    analyze   analyze a CT export for one base domain
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit

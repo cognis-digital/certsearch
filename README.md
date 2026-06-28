@@ -20,6 +20,69 @@ pip install cognis-certsearch
 certsearch scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ certsearch-emit --version
+certsearch 0.1.0
+```
+
+```console
+$ certsearch-emit --help
+usage: certsearch [-h] [--version] {analyze} ...
+
+Analyze Certificate-Transparency exports for subdomains and rogue issuance
+(defensive recon on domains you own).
+
+positional arguments:
+  {analyze}
+    analyze   analyze a CT export for one base domain
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+```
+
+> Blocks above are real `certsearch` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"feed": {
+"type": "STIX",
+"id": "urn:uuid:12345678-1234-1234-1234-123456789012"
+},
+"objects": [
+{
+"type": "indicator",
+"id": "i-12345678-1234-1234-1234-123456789012",
+"name": "Suspicious DNS Query",
+"description": "DNS query for suspicious domain",
+"created_by": "certsearch",
+"modified": "2023-02-20T14:30:00.000Z",
+"labels": ["suspicious", "dns"],
+"observables": [
+{
+"type": "domain-name",
+"value": "example.com"
+},
+{
+"type": "dns-query",
+"value": "A example.com"
+}
+]
+}
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 `certsearch` analyzes a Certificate-Transparency export to surface subdomains for one base domain.
